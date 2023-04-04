@@ -15,10 +15,21 @@ Abstract
 
 Description of the L2 milestone for early DRP type processing.
 
-Add content here
-================
+Introduction
+============
 
-Add content here.
+This document serves as a description of the milestone USDF ready for ComCam processing as
+well as a report on testing to achieve the milestone. The operations milestone ticket for this
+is PREOPS-1667. The description is in Section 2 while the test status is in Section 3.
+
+Milestone Description
+=====================
+
+
+Tests and Test Status
+=====================
+
+
 See the `reStructuredText Style Guide <https://developer.lsst.io/restructuredtext/style.html>`__ to learn how to create sections, links, images, tables, equations, and more.
 
 .. Make in-text citations with: :cite:`bibkey`.
