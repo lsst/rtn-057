@@ -13,7 +13,7 @@
 Abstract
 ========
 
-Description of the L2 milestone for early DRP type processing.
+Description of the L3 milestone for early DRP type processing.
 
 Introduction
 ============
@@ -28,30 +28,30 @@ Milestone Description
 Annual Data Release Processing is planned to be a multi-site activity with the facilities in France, the UK and the US, wherein all data taken to date are reprocessed withe the latest algorithms and calibrations.
 
 The elements of a DRP are:
- - distribution of raw input data to all sites
- - distribution of processing graphs
- - registration of output products (in the butler and Rucio)
- - distribution of output products back to the USDF for the central archive and to the other Data Facilities as needed.
- - demonstrate processing at a sufficient rate
+ - Distribution of raw input data to all sites
+ - Distribution of processing graphs
+ - Registration of output products (in the butler and Rucio)
+ - Distribution of output products back to the USDF for the central archive and to the other Data Facilities as needed.
+ - Demonstrate processing at a sufficient rate
  
  It is anticipated that the Rucio and FTS tools will be used for data distribution and PanDA for distributed workflow. All three servers should be in production at the USDF.
 
 Tests and Test Status
 =====================
 
-distribution of raw input data to all sites
+Distribution of raw input data to all sites
 -------------------------------------------
 
-distribution of processing graphs
+Distribution of processing graphs
 ---------------------------------
 
-registration of output products
+Registration of output products
 -------------------------------
 
-distribution of output products
+Distribution of output products
 -------------------------------
  
-demonstrate processing at a sufficient rate
+Demonstrate processing at a sufficient rate
 -------------------------------------------
 
 See the `reStructuredText Style Guide <https://developer.lsst.io/restructuredtext/style.html>`__ to learn how to create sections, links, images, tables, equations, and more.
