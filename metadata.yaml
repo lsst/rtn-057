@@ -13,7 +13,7 @@ serial_number: "057"
 doc_id: "RTN-057"
 
 # Title of the document, without the series/serial designation
-doc_title: "L2 - Ready for \"DRP-like\" Processing"
+doc_title: "L3 - Ready for \"DRP-like\" Processing"
 
 # Author names, ordered as a list. Each author name should be formatted as 'First Last'
 authors:
@@ -37,7 +37,7 @@ authors:
 copyright: "2023, Association of Universities for Research in Astronomy, Inc. (AURA)"
 
 # Description. A short, 1-2 sentence statemement used by document indices.
-description: "Description of the L2 milestone for early DRP type processing."
+description: "Description of the L3 milestone for early DRP type processing."
 
 # Abstract, if available
 # abstract: >

@@ -8,13 +8,13 @@
      :target: http://dx.doi.org/10.5281/zenodo.#####
 
 ####################################
-L2 - Ready for "DRP-like" Processing
+L3 - Ready for "DRP-like" Processing
 ####################################
 
 RTN-057
 =======
 
-Description of the L2 milestone for early DRP type processing.
+Description of the L3 milestone for early DRP type processing.
 
 **Links:**
 
