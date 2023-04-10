@@ -18,9 +18,16 @@ Description of the L3 milestone for early DRP type processing.
 Introduction
 ============
 
-This document serves as a description of the milestone USDF ready for ComCam processing as
+This document serves as a description of the milestone USDF ready for DP1 processing as
 well as a report on testing to achieve the milestone. The operations milestone ticket for this
-is PREOPS-1667. The description is in Section 3 while the test status is in Section 4.
+is `PREOPS-1667 <https://jira.lsstcorp.org/browse/PREOPS-1667>`__. Other relevant documents include:
+
+- `DMTN-198: Data Backbone Implementation <https://dmtn-198.lsst.io/>`__
+- `DMTN-213: Multi-Site Data Release Processing Using PanDA and Rucio <https://dmtn-213.lsst.io/>`__
+- `Rucio+Butler Note <https://confluence.lsstcorp.org/x/Yw6lCg>`__
+- `Rucio/Butler Ingest Misc Notes <https://confluence.lsstcorp.org/x/JZDDD>`__
+
+The description is in Section 3 while the test status is in Section 4.
 
 Milestone Description
 =====================
@@ -31,12 +38,12 @@ Annual Data Release Processing is planned to be a multi-site activity with the f
 Based on `DMTN-213 <https://dmtn-213.lsst.io/>`__, here is a description of multi-site DRP processing.  We assume that a local source Butler and registry have been set up at each Data Facility (DF) with a skymap and reference catalogs, but not necessarily with calibration products.  We also assume that each DF will handle processing for a contiguous subset of skymap patches that are unique to that DF.
 
 #. Calibration products are replicated to each DF and ingested into the local source Butler by the Replica Monitor.
-#. Campaign Management tooling (CMt) determines which raw visit data should be copied to each DF to support coadd generation (step 3) and later processing and to minimize downstream data movement.  We assume individual visits will not be subdivided between DFs, i.e., DFs will only consider whole visits.
-#. CMt generates the yaml files, for all steps (1-9), specific to each DF.
-#. Raw data are replicated as necessary to Fr and UK DFs, and the Replica Monitor ingests raw data into the local source Butler at each DF.
-#. For each step in (1..9):
+#. Campaign Management tooling (CMt) determines which raw visit data should be copied to each DF to support coadd generation (nominally step 3) and later processing and to minimize downstream data movement.  We assume individual visits will not be subdivided between DFs, i.e., DFs will only consider whole visits.
+#. CMt generates the yaml files for all steps, specific to each DF, and distributes these yaml files to the DFs.
+#. Raw data are replicated as necessary to FrDF and UKDF, and the Replica Monitor ingests raw data into the local source Butler at each DF.
+#. For each step in the DRP pipeline:
 
-  #. BPS generates QuantumGraphs (QGs) and Execution Butlers (EBs) from the yamls at USDF.
+  #. BPS generates QuantumGraphs (QGs) and Execution Butlers (EBs) from the yaml files at each DF, and relevant information from the QGs & EBs are transferred to the USDF to maintain a global view of the processing.
   #. Needed data for the current step are replicated from USDF to the remote DF.
   #. PanDA/BPS submits the workflows from USDF to the corresponding DFs.
   #. When the workflows finish, they merge the EB into the local source Butler. The relevant datasets are also registered with Rucio.
@@ -45,8 +52,9 @@ Based on `DMTN-213 <https://dmtn-213.lsst.io/>`__, here is a description of mult
 Notes:
 
 - Aside from the final, non-temporary data products that will be replicated to USDF, the only other data that needs to be transferred will be the PVIs that are needed for coadd generation at a given DF.  These PVIs will be in the "overlap regions" of their corresponding visit and the sky patches that are assigned to the neighboring regions assigned to the other DFs.  Since PVIs are "final" data products, they will all be copied to USDF and can be transferred to remote DFs from USDF as needed.
-- It's unclear how temporaries like the warps will be handled.  They need to be in the Butler registry in order for the QGs to be generated.  If all QGs are generated at USDF, then data like the warps needed to be in the USDF registry, but presumably not copied to USDF.  Are they registered with Rucio URIs?  Do we have that capability?
+- Following section 5.2 of DMTN-213, we assume that QG and EB generation will be local to the specific DFs.  This avoids having to register temporaries, like the warps, with the USDF Butler, as would be needed for BPS to generate the QGs/EBs there.
 - The above sequence assumes we will be using the DC2 test-med-1 dataset, which does not include global calibration at the tail end of single frame processing.  The global calibration steps are part of HSC processing (see steps 2b-e in the `HSC DRP-Prod pipelne <https://github.com/lsst/drp_pipe/blob/main/pipelines/HSC/DRP-Prod.yaml#L43>`__), and (I think) they require all of the visit-level catalog data to be processed at a single site, i.e., at USDF, before proceeding with steps 3 and later.  Should we consider an HSC data set instead for these tests?
+- We need a mechanism for tracking the BPS yaml files generated by CMt and distributed to the DFs.
 
 Tests and Test Status
 =====================
